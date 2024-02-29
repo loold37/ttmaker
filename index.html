@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시간표 웹사이트</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+<body>
+    <header>
+        <h1>3학년 개인별 시간표</h1>
+    </header>
+    <main>
+        <section id="input-section">
+            <input type="text" id="code" placeholder="2학년 학번">
+            <button onclick="showTimetable().catch(console.error)">시간표 출력</button>
+            <input type="text" id="code3" placeholder="3학년 학번">
+        </section>
+        <section id="timetable-section">
+            <h2>시간표</h2>
+            <table id="timetable">
+                <thead>
+                    <tr>
+                        <th class="hour">교시</th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                    </tr>
+                </thead>
+                <tbody id="timetable-body">
+                </tbody>
+            </table>
+        </section>
+        <p style="font-size:10px; text-align:center;">
+            2학년 학번과 3학년 학번 둘 중 하나에만 작성해도 시간표는 잘 출력됩니다.
+            <br>
+            <br>
+            베타 버전입니다. 문제가 발생할 시 2906/3805 김태관에게 연락 주세요 :)
+        </p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
