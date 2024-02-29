@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    background-color: #eee;
+    padding: 10px;
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: blue;
+    font-size: 24px;
+}
+
+#input-section {
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+}
+
+#code, #code3 {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+#button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+#timetable-section {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th, td {
+    padding: 5px;
+    border: 1px solid #ccc
+}
+
+th {
+    text-align: center;
+}
+
+.hour {
+    width: 30px;
+}
+
+@media screen and (max-width: 600px) {
+    #code, #code3 {
+        width: 30%;
+    }
+}
