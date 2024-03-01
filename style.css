@@ -50,9 +50,10 @@ h1 {
 
 #timetable {
     width: 100%;
+    max-width: 550px;
     border-collapse: collapse;
     margin: auto;
-    table-layout: fixed; 
+    table-layout: fixed;
 }
 
 #loading {
@@ -68,12 +69,17 @@ th {
     text-align: center;
 }
 
+
 .hour {
-    width: 28px;
+    width: 10%;
+}
+
+.day {
+    width: 18%;
 }
 
 @media screen and (max-width: 600px) {
     #code, #code3 {
-        width: 30%;
+        width: 28%;
     }
 }
