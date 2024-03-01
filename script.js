@@ -1,6 +1,6 @@
 function init() {
     gapi.client.init({
-        'apiKey': 'AIzaSyCye9jtUXGqBMTqSdMc9t4SpdINj29Frtg',
+        'apiKey': 'AIzaSyCye9jtUXGqBMTqSdMc9t4SpdINj29Frtg', 
         'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
     }).then(function() {
     }).catch(function(error) {
@@ -9,8 +9,8 @@ function init() {
 }
 
 function getSpreadsheetData(range) {
-    var spreadsheetId = "1YvRF9-U536Q_PB8EiZkR2bRu211dLGm9s7VXgQKTDo8";
-    
+    var spreadsheetId = "1YvRF9-U536Q_PB8EiZkR2bRu211dLGm9s7VXgQKTDo8"; 
+
     return gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: spreadsheetId,
         range: range,
@@ -24,7 +24,8 @@ function getSpreadsheetData(range) {
 async function findTimetable(code) {
     var data = await getSpreadsheetData("반시간표!A:AJ");
     var sData = await getSpreadsheetData("수강과목!A:O");
-    var pData = [1,2];
+    var rData = await getSpreadsheetData("이동반!A:G");
+    var pData = [1, 2];
 
     for (var i = 1; i < sData.length; i++) {
         if (sData[i][1] === code) {
@@ -33,16 +34,25 @@ async function findTimetable(code) {
         }
     }
 
-    console.log(pData);
     code = code.substr(1, 1);
-    console.log(code);
 
     for (var i = 0; i < data.length; i++) {
         if (data[i][0] === code) {
             for (var j = 1; j < data[i].length; j++) {
-                if(data[i][j]>=1 && data[i][j]<=10) {
-                    var d = parseInt(data[i][j])+2;
+                if (data[i][j] >= 1 && data[i][j] <= 10) {
+                    var d = parseInt(data[i][j]) + 2;
                     data[i][j] = pData[d];
+                    
+                    if(d-2 >= 1 && d-2 <= 6) {
+                        for(var k = 1; k < rData.length; k++) {
+                            if(rData[k][d-2] === data[i][j]) {
+                                data[i][j] = data[i][j] + '<font size=2><br/><b>' + rData[k][0] + '</b></font>';
+                            }
+                        }
+                    }
+                }
+                else {
+                    data[i][j] = data[i][j] + '<font size=2><br/>' + data[i + 1][j] + '</font>';
                 }
             }
             return data[i];
@@ -57,20 +67,23 @@ async function findCode3(code) {
 
     for (var i = 1; i < Data.length; i++) {
         if (Data[i][0] === code) {
-            console.log(Data[i][1]);
             return Data[i][1];
         }
     }
 }
 
+
 async function showTimetable() {
+    var loading = document.getElementById("loading");
+    loading.style.display = "block";
+
     var code = document.getElementById("code").value;
     var code3 = document.getElementById("code3").value;
-    
-    if(code3 === '') {
+
+    if (code3 === '') {
         code3 = await findCode3(code);
     }
-    
+
     var timetableData = await findTimetable(code3);
 
     if (timetableData === null) {
@@ -97,12 +110,12 @@ async function showTimetable() {
         t4.style.textAlign = "center";
         t5.style.textAlign = "center";
 
-        time.textContent = i + 1;
-        t1.textContent = timetableData[i + 1];
-        t2.textContent = timetableData[i + 8];
-        t3.textContent = timetableData[i + 15];
-        t4.textContent = timetableData[i + 22];
-        t5.textContent = timetableData[i + 29];
+        time.innerHTML = i + 1;
+        t1.innerHTML = timetableData[i + 1];
+        t2.innerHTML = timetableData[i + 8];
+        t3.innerHTML = timetableData[i + 15];
+        t4.innerHTML = timetableData[i + 22];
+        t5.innerHTML = timetableData[i + 29];
 
         WD.appendChild(time);
         WD.appendChild(t1);
@@ -113,6 +126,8 @@ async function showTimetable() {
 
         tbody.appendChild(WD);
     }
+
+    loading.style.display = "none";
 }
 
 gapi.load('client', init);
