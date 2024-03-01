@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3시간표</title>
+    <title>시간표</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
@@ -17,6 +17,7 @@
             <button onclick="showTimetable().catch(console.error)">시간표 출력</button>
             <input type="text" id="code3" placeholder="3학년 학번">
         </section>
+        <div id="loading" style="display: none;">로딩중...</div>
         <section id="timetable-section">
             <h2>시간표</h2>
             <table id="timetable">
@@ -38,7 +39,7 @@
             2학년 학번과 3학년 학번 둘 중 하나에만 작성해도 시간표는 잘 출력됩니다.
             <br>
             <br>
-            베타 버전입니다. 문제가 발생할 시 2906/3805 김태관에게 연락 주세요 :)
+            문제가 발생할 시 2906/3805 김태관에게 연락 주세요 :)
         </p>
     </main>
     <script src="script.js"></script>
