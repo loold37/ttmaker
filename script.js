@@ -39,7 +39,7 @@ async function findTimetable(code) {
     for (var i = 0; i < data.length; i++) {
         if (data[i][0] === code) {
             for (var j = 1; j < data[i].length; j++) {
-                if (data[i][j] >= 1 && data[i][j] <= 10) {
+                if (data[i][j] >= 1 && data[i][j] <= 11) {
                     var d = parseInt(data[i][j]) + 2;
                     data[i][j] = pData[d];
                     
